@@ -206,10 +206,10 @@ class ControlWidget(QtWidgets.QWidget):
         
         btn_browse = QPushButton("Browse...")
         btn_browse.clicked.connect(self.onBrowseDirectory)
-        btn_browse.setIcon(qta_icon('fa6.folder', color='white'))
+        btn_browse.setIcon(qta_icon('mdi.folder', color='white'))
         
         self.btn_openDirectory = QPushButton("Open Directory")
-        self.btn_openDirectory.setIcon(qta_icon('fa6.folder-open', color='white'))
+        self.btn_openDirectory.setIcon(qta_icon('mdi.folder-open', color='white'))
         self.btn_openDirectory.clicked.connect(self.openLastImagesDirectory)
         
         fileLayout = QVBoxLayout()
@@ -316,9 +316,9 @@ class ControlWidget(QtWidgets.QWidget):
         self.setLayout(gmain)
         
         # Icons (qtawesome)
-        self.btn_open.setIcon(qta.icon('fa6.circle-play', color='white'))
-        self.btn_snap.setIcon(qta.icon('fa6.image', color='white'))
-        self.btn_trigger.setIcon(qta.icon('fa6.images', color='white'))
+        self.btn_open.setIcon(qta.icon('mdi.play', color='white'))
+        self.btn_snap.setIcon(qta.icon('mdi.image-area', color='white'))
+        self.btn_trigger.setIcon(qta.icon('mdi.image-multiple', color='white'))
         
         self.timer.timeout.connect(self.onTimer)
         self.evtCallback.connect(self.onevtCallback)
@@ -967,3 +967,4 @@ class ControlWidget(QtWidgets.QWidget):
         self.ax_hist.set_ylabel("Counts")
         
         self.canvas_hist.draw()
+
