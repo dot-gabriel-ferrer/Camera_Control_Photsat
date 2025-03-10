@@ -8,7 +8,7 @@ EHD Camera Controller UI PhotSat is a GUI application built with PyQt5 for contr
 
 ## Prerequisites
 
-Before using this software, please ensure you have installed **EHDViewLite** from the [EHD website](https://www.ehd.de/driver/).  
+Before using this software, please ensure you have installed **EHDViewLite** from the [EHD website](https://www.ehd.de/driver/).
 Alternatively, you can add a udev rules file to configure device permissions.
 
 ### Udev Rules (for Linux)
@@ -56,32 +56,59 @@ After copying the file, unplug and re-plug your camera device.
 
 ## Installation
 
+
+## Installation
+
 1. **Clone the Repository:**
 
    ```bash
    git clone https://github.com/yourusername/EHD-Camera-Controller.git
    cd EHD-Camera-Controller
    ```
-
 2. **Install Dependencies:**
+   All required Python packages are listed in the `requirements.txt` file. To install them, run:
 
-   Ensure you have Python 3.x installed, then run:
    ```bash
-   pip install PyQt5 qt_material qtawesome numpy matplotlib astropy
+   pip install -r requirements.txt
    ```
-   Also, ensure that the NNcam SDK and its Python bindings (`nncam.py`) are properly set up.
 
+   The `requirements.txt` file should contain the following (or similar) content:
+
+   ```plaintext
+   PyQt5>=5.15.0
+   qt_material>=2.8.0
+   qtawesome>=1.2.0
+   numpy>=1.18.0
+   matplotlib>=3.1.0
+   astropy>=4.0.0
+   ```
 3. **Configure the NNcam Library:**
 
-   - **For Linux:**  
-     Ensure `libnncam.so` is either in the project folder or in your system library path.  
-     Also, if needed, add the `99-ehdcam.rules` file to `/etc/udev/rules.d` as described above.
-     
-   - **For Windows:**  
-     Replace `libnncam.so` with the corresponding DLL (e.g., `libnncam.dll`) and update the PyInstaller configuration accordingly.
+   * **For Linux:**
 
-4. **Install EHDViewLite:**  
+     Ensure `libnncam.so` is either in the project folder or in your system library path.
+
+     Also, if needed, add the `99-ehdcam.rules` file to `/etc/udev/rules.d` as described below:
+
+     ```bash
+     # Copy this file to /etc/udev/rules.d
+
+     # Once done, unplug and re-plug your device. This is all that is
+     # necessary to see the new permissions. Udev does not have to be restarted.
+
+     # If you think permissions of 0666 are too loose, then see:
+     # http://reactivated.net/writing_udev_rules.html for more information on finer
+     # grained permission setting.
+
+     SUBSYSTEM=="usb", ATTRS{idVendor}=="0547", MODE="0666"
+     ```
+   * **For Windows:**
+
+     Replace `libnncam.so` with the corresponding DLL (e.g., `libnncam.dll`) and update the PyInstaller configuration accordingly.
+4. **Install EHDViewLite:**
    Download and install **EHDViewLite** from [https://www.ehd.de/driver/](https://www.ehd.de/driver/).
+
+After following these steps, you should have all the necessary dependencies installed to run the application.
 
 ## Running the Application
 
@@ -98,7 +125,7 @@ python main.py
 To build a standalone executable on Linux:
 
 ```bash
-pyinstaller --onefile --windowed --icon=your_icon.ico --add-binary "libnncam.so:." main.py
+pyinstaller --onefile --windowed --icon=your_icon.ico --add-data "libnncam.so:." main.py
 ```
 
 ### Windows
@@ -116,4 +143,3 @@ Contributions are welcome! Please fork this repository and submit pull requests.
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-```
