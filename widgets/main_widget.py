@@ -4,10 +4,10 @@ from PyQt5 import QtWidgets
 from PyQt5.QtCore import QTimer
 from PyQt5.QtGui import QIcon
 
-from logging_utils import LogWidget, LogHandler
-from control_widget import ControlWidget
-from utils import log_exceptions
-import nncam 
+from utils.logging_utils import LogWidget, LogHandler
+from widgets.control_widget import ControlWidget
+from utils.utils import log_exceptions
+import nncam.nncam as nncam 
 
 class MainWidget(QtWidgets.QWidget):
     """

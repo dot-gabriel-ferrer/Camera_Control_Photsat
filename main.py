@@ -5,9 +5,9 @@ import time
 import logging
 
 from PyQt5.QtWidgets import QApplication
-import nncam
+import nncam.nncam as nncam
 
-from main_widget import MainWidget
+from widgets.main_widget import MainWidget
 
 def main():
     """

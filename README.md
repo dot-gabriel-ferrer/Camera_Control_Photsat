@@ -1,15 +1,28 @@
-# EHD Camera Controller UI PhotSat
+# Camera_Control_Photsat/
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
-
-## Overview
-
-EHD Camera Controller UI PhotSat is a GUI application built with PyQt5 for controlling and capturing images from a camera using the NNcam SDK. The application provides features such as live preview, exposure and gain settings, macro capture sequences, and file saving in multiple formats (JPEG, RAW, FITS).
+├── main.py                # Application entry point
+├── requirements.txt       # List of Python dependencies
+├── README.md              # Project documentation
+├── assets/                # Contains resources such as icons
+│   └── icon.ico           # Application icon
+├── widgets/               # UI components and widgets
+│   ├── circular_progress.py
+│   ├── collapsible_box.py
+│   ├── control_widget.py
+│   ├── macro_widget.py
+│   ├── main_widget.py
+│   ├── preview_label.py
+│   └── preview_window.py
+├── utils/                 # Utility functions and logging utilities
+│   ├── logging_utils.py
+│   └── utils.py
+└── nncam/                 # NNcam SDK bindings and library
+     ├── nncam.py
+     └── libnncam.so        # For Windows, use the corresponding DLL (e.g., libnncam.dll) or for Linux, use the SO file instead
 
 ## Prerequisites
 
-Before using this software, please ensure you have installed **EHDViewLite** from the [EHD website](https://www.ehd.de/driver/).
-Alternatively, you can add a udev rules file to configure device permissions.
+Before using this software, please ensure you have installed **EHDViewLite** from the [EHD website](https://www.ehd.de/driver/). Alternatively, you can configure device permissions using a udev rules file on Linux.
 
 ### Udev Rules (for Linux)
 
@@ -32,27 +45,12 @@ After copying the file, unplug and re-plug your camera device.
 
 ## Features
 
-- **Camera Control:** Open/close the camera, capture images (Snap/Trigger), adjust exposure and gain.
-- **Live Preview:** Display a live preview with options to flip the image horizontally or vertically.
-- **Macro Mode:** Create macro capture sequences by defining a series of steps via a table, with CSV import/export.
-- **Histogram Display:** View a live histogram of the image intensity.
-- **Logging:** Integrated execution log to display debug and error messages.
-- **Customizable Themes:** Apply different themes and customize text color.
-
-## Project Files
-
-- `circular_progress.py` - Custom circular progress bar widget.
-- `collapsible_box.py` - A collapsible container widget.
-- `control_widget.py` - Main widget for camera control.
-- `libnncam.so` - Native shared library (Linux). *(For Windows, use the corresponding DLL.)*
-- `logging_utils.py` - Logging widget and handler.
-- `macro_widget.py` - Widget to manage macro capture sequences.
-- `main_widget.py` - Main window containing tabs for control and execution log.
-- `main.py` - Entry point of the application.
-- `nncam.py` - Python bindings for the NNcam SDK.
-- `preview_label.py` - Custom QLabel for camera preview.
-- `preview_window.py` - Independent window for preview with zoom and pan.
-- `utils.py` - Utility functions and decorators.
+* **Camera Control:** Open/close the camera, capture images (Snap/Trigger), and adjust exposure and gain.
+* **Live Preview:** Display a live preview with options to flip the image horizontally or vertically.
+* **Macro Mode:** Create macro capture sequences by defining a series of steps (with CSV import/export).
+* **Histogram Display:** View a live histogram of image intensity.
+* **Logging:** Integrated logging to display debug and error messages.
+* **Customizable Themes:** Apply different themes and customize text colors.
 
 ## Installation
 
@@ -69,7 +67,7 @@ After copying the file, unplug and re-plug your camera device.
    pip install -r requirements.txt
    ```
 
-   The `requirements.txt` file should contain the following (or similar) content:
+   The `requirements.txt` should include packages such as:
 
    ```plaintext
    PyQt5>=5.15.0
@@ -83,69 +81,48 @@ After copying the file, unplug and re-plug your camera device.
 
    * **For Linux:**
 
-     Ensure `libnncam.so` is either in the project folder or in your system library path.
-
-     Also, if needed, add the `99-ehdcam.rules` file to `/etc/udev/rules.d` as described below:
-
-     ```bash
-     # Copy this file to /etc/udev/rules.d
-
-     # Once done, unplug and re-plug your device. This is all that is
-     # necessary to see the new permissions. Udev does not have to be restarted.
-
-     # If you think permissions of 0666 are too loose, then see:
-     # http://reactivated.net/writing_udev_rules.html for more information on finer
-     # grained permission setting.
-
-     SUBSYSTEM=="usb", ATTRS{idVendor}=="0547", MODE="0666"
-     ```
+     Ensure that `libnncam.so` is located in the `nncam/` folder or in your system's library path. Also, add the `99-ehdcam.rules` file to `/etc/udev/rules.d` as described above.
    * **For Windows:**
 
-     Replace `libnncam.so` with the corresponding DLL (e.g., `libnncam.dll`) and update the PyInstaller configuration accordingly.
+     Replace `libnncam.so` with the corresponding DLL (e.g., `libnncam.dll`) in the `nncam/` folder, and adjust any PyInstaller commands accordingly.
 4. **Install EHDViewLite:**
    Download and install **EHDViewLite** from [https://www.ehd.de/driver/](https://www.ehd.de/driver/).
 
-After following these steps, you should have all the necessary dependencies installed to run the application.
-
 ## Running the Application
 
-To run the application, execute:
+To run the application in development mode, execute:
 
 ```bash
 python main.py
 ```
 
+This will start the application and display the main interface.
+
 ## Building an Executable with PyInstaller
 
 ### Linux
 
-To build a standalone executable on Linux:
-
-```bash
-pyinstaller --onefile --windowed --icon=your_icon.ico --add-data "libnncam.so:." main.py
-```
+To build a standalone executable on Linux, run:
 
 ### Windows
 
-For Windows, use the appropriate DLL and adjust the binary separator (use a semicolon):
+For Windows, use the appropriate DLL and adjust the data separator:
 
 ```bash
-pyinstaller --onefile --windowed --icon=your_icon.ico --add-binary "libnncam.dll;." main.py
+pyinstaller --onefile --windowed --icon=assets/icon.ico --add-binary "nncam/libnncam.dll;nncam" --name CameraControlPhotsat main.py
 ```
 
-## Pre-built Executable
-
-The repository includes a file named `executable.zip` which contains a standalone executable of the software built using PyInstaller. This executable is intended to allow users to run the application without having to install Python or any additional dependencies. Simply unzip the file and run the executable.
-
-Please note that this pre-built executable was generated on a specific system, so there might be compatibility considerations depending on your operating system and installed libraries. If you encounter issues, you may refer to the [Building an Executable with PyInstaller](#building-an-executable-with-pyinstaller) section to build your own version.
+The generated executable will be located in the `dist/` folder.
 
 ## Contributing
 
-Contributions are welcome! Please fork this repository and submit pull requests.
+Contributions are welcome! Please fork this repository and submit pull requests with your improvements.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-=================================================================================
+This project is licensed under the MIT License. See the [LICENSE]() file for details.
 
+```
 
+Feel free to modify any sections to better fit your project’s needs.
+```
