@@ -1,25 +1,5 @@
 # Camera_Control_Photsat/
 
-├── main.py                # Application entry point
-├── requirements.txt       # List of Python dependencies
-├── README.md              # Project documentation
-├── assets/                # Contains resources such as icons
-│   └── icon.ico           # Application icon
-├── widgets/               # UI components and widgets
-│   ├── circular_progress.py
-│   ├── collapsible_box.py
-│   ├── control_widget.py
-│   ├── macro_widget.py
-│   ├── main_widget.py
-│   ├── preview_label.py
-│   └── preview_window.py
-├── utils/                 # Utility functions and logging utilities
-│   ├── logging_utils.py
-│   └── utils.py
-└── nncam/                 # NNcam SDK bindings and library
-     ├── nncam.py
-     └── libnncam.so        # For Windows, use the corresponding DLL (e.g., libnncam.dll) or for Linux, use the SO file instead
-
 ## Prerequisites
 
 Before using this software, please ensure you have installed **EHDViewLite** from the [EHD website](https://www.ehd.de/driver/). Alternatively, you can configure device permissions using a udev rules file on Linux.
