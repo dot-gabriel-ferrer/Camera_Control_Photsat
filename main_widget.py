@@ -1,15 +1,13 @@
 import logging
-import datetime
-import numpy as np
 
-from PyQt5 import QtCore, QtWidgets, QtGui
-from PyQt5.QtCore import pyqtSignal, QTimer, Qt, QSignalBlocker
-from PyQt5.QtWidgets import QApplication  # Necessary import
-from PyQt5.QtGui import QImage, QPixmap, QColor, QIcon
+from PyQt5 import QtWidgets
+from PyQt5.QtCore import QTimer
+from PyQt5.QtGui import QIcon
 
 from logging_utils import LogWidget, LogHandler
 from control_widget import ControlWidget
 from utils import log_exceptions
+import nncam 
 
 class MainWidget(QtWidgets.QWidget):
     """
@@ -144,7 +142,7 @@ class MainWidget(QtWidgets.QWidget):
         Attempts to extract the image from the buffer after a Snap/Trigger.
         If it fails, retries several times; if ultimately unsuccessful, skips this capture.
         """
-        MAX_RETRIES = 5
+        MAX_RETRIES = 0
         try:
             self.controlTab.hcam.PullImageV4(self.controlTab.pData, 0, self.controlTab.bitdepth, 0, None)
         except nncam.HRESULTException as e:

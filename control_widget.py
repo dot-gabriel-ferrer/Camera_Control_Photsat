@@ -4,20 +4,22 @@ import numpy as np
 import datetime
 import logging
 
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtCore import pyqtSignal, QTimer, Qt, QSignalBlocker
-from PyQt5.QtGui import QImage, QPixmap, QColor, QIcon
+from PyQt5.QtGui import QImage, QColor
 
 from PyQt5.QtWidgets import (
-    QLabel, QApplication, QWidget, QCheckBox, QMessageBox, QPushButton, QComboBox,
+    QLabel, QApplication, QCheckBox, QMessageBox, QPushButton, QComboBox,
     QLineEdit, QGroupBox, QGridLayout, QHBoxLayout, QVBoxLayout, QMenu, QAction,
-    QFileDialog, QSpinBox, QToolButton, QSizePolicy, QColorDialog, QTabWidget,
-    QTableWidget, QTableWidgetItem, QHeaderView, QPlainTextEdit, QScrollArea
+    QFileDialog, QSpinBox
 )
 
 from qt_material import apply_stylesheet
 import qtawesome as qta
 from astropy.io import fits
+
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 import nncam

@@ -1,5 +1,4 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
-from PyQt5.QtCore import QRectF
 
 class PreviewWindow(QtWidgets.QMainWindow):
     """

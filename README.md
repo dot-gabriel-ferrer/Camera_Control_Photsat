@@ -56,9 +56,6 @@ After copying the file, unplug and re-plug your camera device.
 
 ## Installation
 
-
-## Installation
-
 1. **Clone the Repository:**
 
    ```bash
@@ -135,6 +132,12 @@ For Windows, use the appropriate DLL and adjust the binary separator (use a semi
 ```bash
 pyinstaller --onefile --windowed --icon=your_icon.ico --add-binary "libnncam.dll;." main.py
 ```
+
+## Pre-built Executable
+
+The repository includes a file named `executable.zip` which contains a standalone executable of the software built using PyInstaller. This executable is intended to allow users to run the application without having to install Python or any additional dependencies. Simply unzip the file and run the executable.
+
+Please note that this pre-built executable was generated on a specific system, so there might be compatibility considerations depending on your operating system and installed libraries. If you encounter issues, you may refer to the [Building an Executable with PyInstaller](#building-an-executable-with-pyinstaller) section to build your own version.
 
 ## Contributing
 
