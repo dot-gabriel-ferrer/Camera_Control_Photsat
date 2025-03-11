@@ -22,15 +22,15 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-import nncam
+import nncam.nncam as nncam
 
 # Import auxiliary classes
-from utils import log_exceptions
-from collapsible_box import CollapsibleBox
-from preview_label import PreviewLabel
-from preview_window import PreviewWindow
+from utils.utils import log_exceptions
+from widgets.collapsible_box import CollapsibleBox
+from widgets.preview_label import PreviewLabel
+from widgets.preview_window import PreviewWindow
 
-from circular_progress import CircularProgress
+from widgets.circular_progress import CircularProgress
 
 plt.style.use('dark_background')
 
@@ -278,7 +278,7 @@ class ControlWidget(QtWidgets.QWidget):
         histTab.setLayout(histLayout)
         
         # Macro tab (loaded from macro_widget.py)
-        from macro_widget import MacroModeWidget
+        from widgets.macro_widget import MacroModeWidget
         self.macroWidget = MacroModeWidget(self)
         
         macroScrollArea = QScrollArea()
