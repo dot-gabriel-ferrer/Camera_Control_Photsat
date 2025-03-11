@@ -3,6 +3,7 @@ import logging
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QTimer
 from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import Qt
 
 from utils.logging_utils import LogWidget, LogHandler
 from widgets.control_widget import ControlWidget
@@ -229,8 +230,8 @@ class MainWidget(QtWidgets.QWidget):
                                self.controlTab.imgWidth, QImage.Format_Grayscale8)
         newimage = image_preview.scaled(self.controlTab.lbl_video.width(),
                                         self.controlTab.lbl_video.height(),
-                                        self.controlTab.Qt.KeepAspectRatio,
-                                        self.controlTab.Qt.FastTransformation)
+                                        Qt.KeepAspectRatio,
+                                        Qt.FastTransformation)
         
         self.controlTab.currentPreviewImage = newimage
         self.controlTab.lbl_video.setPixmap(QPixmap.fromImage(newimage))
