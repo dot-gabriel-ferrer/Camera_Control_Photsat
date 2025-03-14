@@ -588,7 +588,8 @@ class ControlWidget(QtWidgets.QWidget):
         else:
             arr = nncam.Nncam.EnumV2()
             if len(arr) == 0:
-                QMessageBox.warning(self, "Warning", "No camera found.")
+                print("check")
+                #QMessageBox.warning(self, "Warning", "No camera found.")
             elif len(arr) == 1:
                 self.cur = arr[0]
                 self.openCamera()
@@ -762,7 +763,7 @@ class ControlWidget(QtWidgets.QWidget):
                         self.hcam.TriggerSoftware()
                     except Exception as e:
                         logging.exception("Error executing TriggerSoftware")
-                        QMessageBox.warning(self, "Error", f"Error triggering: {e}")
+                        #QMessageBox.warning(self, "Error", f"Error triggering: {e}")
                 else:
                     self.save_capture = False
     

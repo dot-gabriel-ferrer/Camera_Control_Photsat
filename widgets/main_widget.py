@@ -129,8 +129,9 @@ class MainWidget(QtWidgets.QWidget):
                 try:
                     self.controlTab.hcam.TriggerSoftware()
                 except Exception as e:
-                    logging.exception("Error in TriggerSoftware: %s", e)
-                    self.controlTab.hcam.Snap(self.controlTab.res)
+                    #logging.exception("Error in TriggerSoftware: %s", e)
+                    #self.controlTab.hcam.Snap(self.controlTab.res)
+                    print(f"check{e}")
             else:
                 self.controlTab.hcam.Snap(self.controlTab.res)
         
